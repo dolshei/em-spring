@@ -39,8 +39,9 @@ public class BoardService {
      * 게시글 저장
      * @param board
      */
-    public void save(Board board) {
+    public int save(Board board) {
         boardRepository.save(board);
+        return board.getBoardSeq();
     }
 
     /**

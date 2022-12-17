@@ -41,8 +41,8 @@ public class BoardController {
      * @param board
      */
     @GetMapping("/save")
-    public void save(Board board) {
-        boardService.save(board);
+    public int save(Board board) {
+        return boardService.save(board);
     }
 
     /**
