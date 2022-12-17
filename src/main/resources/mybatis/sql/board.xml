@@ -4,11 +4,36 @@
 <mapper namespace="site.dolshei.emspring.mvc.repository.BoardRepository">
     <select id="getList" parameterType="site.dolshei.emspring.mvc.domain.Board" resultType="site.dolshei.emspring.mvc.domain.Board">
         SELECT
-            B.board_seq,
-            B.title,
-            B.contents,
-            B.regdate
-        FROM    board B
-        ORDER BY B.regdate DESC
+            B.BOARD_SEQ,
+            B.TITLE,
+            B.CONTENTS,
+            B.REG_DATE
+        FROM    T_BOARD B
+        ORDER BY B.REG_DATE DESC
     </select>
+
+    <select id="get" parameterType="int" resultType="site.dolshei.emspring.mvc.domain.Board">
+        SELECT
+            B.BOARD_SEQ,
+            B.TITLE,
+            B.CONTENTS,
+            B.REG_DATE
+        FROM    T_BOARD B
+        WHERE B.BOARD_SEQ = #{boardSeq}
+    </select>
+
+    <insert id="save" parameterType="site.dolshei.emspring.mvc.domain.Board">
+        INSERT INTO T_BOARD
+        (
+         TITLE,
+         CONTENTS,
+         REG_DATE
+        )
+        VALUES
+            (
+             #{title},
+             #{contents},
+             NOW()
+            )
+    </insert>
 </mapper>
