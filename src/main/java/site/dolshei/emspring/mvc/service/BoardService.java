@@ -37,27 +37,25 @@ public class BoardService {
 
     /**
      * 게시글 저장
-     * @param board
+     * @param parameter
      */
-    public int save(Board board) {
-        boardRepository.save(board);
-        return board.getBoardSeq();
-    }
-
-    /**
-     * 게시글 수정
-     * @param board
-     */
-    public void update(Board board) {
-        boardRepository.update(board);
+    public int save(Board parameter) {
+        Board board = boardRepository.get(parameter.getBoardSeq());
+        if (board == null){
+            boardRepository.save(parameter);
+        } else {
+            boardRepository.update(parameter);
+        }
+        return parameter.getBoardSeq();
     }
 
     /**
      * 게시글 삭제
      * @param boardSeq
      */
-    public void delete(int boardSeq) {
+    public boolean delete(int boardSeq) {
         boardRepository.delete(boardSeq);
+        return true;
     }
 
 }
